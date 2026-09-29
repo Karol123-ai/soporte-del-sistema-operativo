@@ -1,0 +1,42 @@
+Guarda cada imagen en esta carpeta con EXACTAMENTE este nombre (.jpg, .png o .webp).
+Si falta una, la página muestra un recuadro que indica el nombre.
+
+NOMBRE  ->  QUÉ BUSCAR
+que-es-so.jpg  ->  operating system layers diagram
+objetivos.jpg  ->  operating system functions infographic
+gestion-memoria.jpg  ->  memory management operating system
+fisica-virtual.jpg  ->  virtual memory RAM disk diagram
+asignacion.jpg  ->  memory allocation processes diagram
+paginacion.jpg  ->  paging page table frames diagram
+segmentacion.jpg  ->  memory segmentation diagram
+fragmentacion.jpg  ->  internal external fragmentation diagram
+swapping.jpg  ->  swapping RAM disk diagram
+proteccion.jpg  ->  memory protection process isolation
+scheduling.jpg  ->  CPU scheduling diagram
+estados-proceso.jpg  ->  process states diagram
+fcfs.jpg  ->  FCFS gantt chart
+sjf.jpg  ->  SJF gantt chart
+round-robin.jpg  ->  round robin scheduling gantt
+prioridades.jpg  ->  priority scheduling aging
+cambio-contexto.jpg  ->  context switch diagram
+capas.jpg  ->  hardware software layers
+componente-cpu.jpg  ->  procesador CPU foto / CPU processor close up
+componente-ram.jpg  ->  módulo RAM DDR5 foto
+componente-disco.jpg  ->  SSD NVMe y disco duro HDD
+componente-teclado-mouse.jpg  ->  teclado y mouse
+componente-red.jpg  ->  tarjeta de red NIC / cable ethernet
+drivers.jpg  ->  device driver diagram
+interrupciones.jpg  ->  interrupt handling diagram
+system-calls.jpg  ->  system call user mode kernel mode
+kernel.jpg  ->  kernel architecture diagram
+virtualizacion.jpg  ->  virtualization virtual machines diagram
+hipervisor.jpg  ->  hypervisor type 1 type 2
+ventajas-desventajas.jpg  ->  virtualization benefits
+contenedores.jpg  ->  containers vs virtual machines
+docker.jpg  ->  docker image container diagram
+kubernetes.jpg  ->  kubernetes architecture
+cloud-os.jpg  ->  cloud computing architecture
+iaas-paas-saas.jpg  ->  iaas paas saas diagram
+comparacion.jpg  ->  virtualization containers cloud comparison
+ejemplo-integrador.jpg  ->  web application server architecture
+repaso-examen.jpg  ->  operating system summary mind map
