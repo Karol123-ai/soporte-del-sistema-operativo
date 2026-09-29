@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Soporte del Sistema Operativo · Grupo 5</title><link rel="stylesheet" href="css/style.css"></head><body>
+<nav><b>SOLAB</b><a href="#inicio">Inicio</a><a href="#metodologia">Metodología</a><a href="#evolucion">Evolución</a><a href="#hw-sw">Hardware-Software</a><a href="#memoria">Memoria</a><a href="#scheduling">Scheduling</a><a href="#avances">Avances</a><a href="#guia">Temas</a><a href="#quiz-s">Quiz</a><a href="#glosario">Glosario</a><a href="#analisis">Análisis</a><a href="#fuentes">Fuentes</a></nav>
+<section id="inicio" class="tab hero"><div><span class="tag">SISTEMAS OPERATIVOS · GRUPO 5</span><h1>Soporte del Sistema Operativo</h1>
+<p>Cómo el sistema operativo administra la memoria, decide quién usa la CPU, conecta el hardware con el software y evoluciona hacia la virtualización, los contenedores y la nube.</p>
+<a class="btn" href="#memoria">Simular memoria</a><a class="btn o" href="#scheduling">Simular scheduling</a>
+<div class="stats"><div><b>4</b>Temas</div><div><b>2</b>Simuladores</div><div><b>3D</b>Interactivo</div></div></div><canvas id="c-hero"></canvas></section>
+
+<section class="tab" id="metodologia"><span class="num">01</span><h2>Introducción y metodología</h2><div class="grid">
+<div class="card"><h3>Objetivo</h3><p>Explicar las funciones de soporte que el SO ofrece a programas y usuarios, con simuladores para comprobar los conceptos.</p></div>
+<div class="card"><h3>Criterios</h3><p>Gestión de memoria, planificación, relación hardware-software y tendencias actuales (virtualización, contenedores, cloud OS).</p></div>
+<div class="card"><h3>Fuentes</h3><p>Documentación oficial (Linux, Docker, Kubernetes, KVM) y texto de referencia de Silberschatz et al.</p></div>
+<div class="card"><h3>Alcance</h3><p>Los simuladores son didácticos y simplificados; un SO real usa optimizaciones que aquí no se modelan.</p></div></div></section>
+
+<section class="tab" id="evolucion"><span class="num">02</span><h2>Evolución del soporte del SO</h2><div class="tl">
+<div><span>1960s</span><h3>Multiprogramación y memoria virtual</h3><p>Los sistemas de tiempo compartido y la paginación permiten ejecutar varios programas a la vez.</p></div>
+<div><span>1970–90</span><h3>UNIX, GUI y sistemas personales</h3><p>Se consolidan el kernel, los procesos y los sistemas de archivos jerárquicos.</p></div>
+<div><span>2001–2008</span><h3>Virtualización x86</h3><p>VMware, Xen y KVM aprovechan las extensiones de virtualización del hardware.</p></div>
+<div><span>2013–2015</span><h3>Contenedores</h3><p>Docker populariza namespaces y cgroups de Linux; Kubernetes orquesta contenedores.</p></div>
+<div><span>2020–2026</span><h3>Cloud, serverless y edge</h3><p>El SO se abstrae: microVMs, sistemas mínimos para contenedores y cómputo en el borde.</p></div></div></section>
+
+<section class="tab" id="hw-sw"><span class="num">03</span><h2>Relación hardware-software</h2><div class="two"><canvas id="c-layers"></canvas><div>
+<p>El SO es la capa intermedia: oculta la complejidad del hardware y ofrece a las aplicaciones una interfaz uniforme (llamadas al sistema).</p>
+<div class="grid" style="grid-template-columns:1fr 1fr">
+<div class="card"><h3>Modo usuario / kernel</h3><p>La CPU restringe instrucciones privilegiadas al kernel.</p></div>
+<div class="card"><h3>Llamadas al sistema</h3><p>Puerta controlada de la aplicación al kernel.</p></div>
+<div class="card"><h3>Interrupciones</h3><p>El hardware avisa eventos (teclado, disco, timer).</p></div>
+<div class="card"><h3>Drivers y DMA</h3><p>Controladores que traducen y mueven datos sin usar la CPU.</p></div>
+<div class="card"><h3>MMU y TLB</h3><p>Traducen direcciones virtuales a físicas.</p></div>
+<div class="card"><h3>Timer</h3><p>Permite el quantum y la expropiación de CPU.</p></div></div></div></div></section>
+
+<section class="tab" id="memoria"><span class="num">04</span><h2>Gestión de memoria</h2>
+<div class="grid"><div class="card"><h3>Paginación</h3><p>Divide la memoria en marcos y el proceso en páginas de igual tamaño; evita la fragmentación externa.</p></div>
+<div class="card"><h3>Memoria virtual</h3><p>Permite ejecutar procesos mayores que la RAM cargando páginas bajo demanda.</p></div>
+<div class="card"><h3>Fallo de página</h3><p>Ocurre cuando la página no está en RAM; el SO la trae del disco y puede reemplazar otra.</p></div>
+<div class="card"><h3>Reemplazo</h3><p>FIFO, LRU y Óptimo deciden qué página sale.</p></div></div>
+<h3 style="margin-top:34px">Simulador de reemplazo de páginas</h3>
+<div class="ctl"><label>Cadena de referencias<input id="m-ref" value="7,0,1,2,0,3,0,4,2,3,0,3,2" size="30"></label>
+<label>Marcos<input id="m-fr" type="number" min="1" max="6" value="3" style="width:70px"></label>
+<label>Algoritmo<select id="m-alg"><option>FIFO</option><option>LRU</option><option>Óptimo</option></select></label><button class="btn" id="m-go">Simular</button></div>
+<div class="sc" id="m-out"></div></section>
+
+<section class="tab" id="scheduling"><span class="num">05</span><h2>Planificación (scheduling)</h2>
+<p>El planificador elige qué proceso listo usa la CPU. Se mide con tiempo de espera, tiempo de retorno y uso de CPU.</p>
+<div class="ctl"><label>Procesos (nombre:llegada:ráfaga)<input id="s-in" size="34" value="P1:0:5, P2:1:3, P3:2:8, P4:3:6"></label>
+<label>Algoritmo<select id="s-alg"><option value="FCFS">FCFS</option><option value="SJF">SJF (no expropiativo)</option><option value="SRTF">SRTF (expropiativo)</option><option value="RR">Round Robin</option></select></label>
+<label>Quantum<input id="s-q" type="number" min="1" value="2" style="width:70px"></label><button class="btn" id="s-go">Simular</button></div>
+<div id="s-out"></div></section>
+
+<section class="tab" id="avances"><span class="num">06</span><h2>Avances: virtualización, contenedores y cloud OS</h2><div class="two"><canvas id="c-virt"></canvas><div>
+<p><b style="color:var(--a)">Izquierda:</b> máquinas virtuales, cada una con su propio SO invitado sobre un hipervisor. <b style="color:var(--b)">Derecha:</b> contenedores que comparten el kernel del host.</p>
+<div class="card"><h3>Virtualización</h3><p>El hipervisor (KVM, Xen, Hyper-V) reparte CPU, memoria y E/S entre VMs aisladas con apoyo del hardware (Intel VT-x, AMD-V).</p></div><br>
+<div class="card"><h3>Contenedores</h3><p>Usan namespaces y cgroups para aislar procesos: arranque en segundos y menor consumo que una VM.</p></div><br>
+<div class="card"><h3>Cloud OS</h3><p>Plataformas que gestionan miles de nodos como un solo sistema (Kubernetes, OpenStack), además de serverless y microVMs.</p></div></div></div>
+<div class="sc" style="margin-top:30px"><table><tr><th></th><th>Máquina virtual</th><th>Contenedor</th><th>Serverless</th></tr>
+<tr><td class="l">Aislamiento</td><td>Alto (SO propio)</td><td>Medio (kernel compartido)</td><td>Gestionado por la nube</td></tr>
+<tr><td class="l">Arranque</td><td>Segundos a minutos</td><td>Milisegundos a segundos</td><td>Bajo demanda</td></tr>
+<tr><td class="l">Consumo</td><td>Mayor</td><td>Menor</td><td>Solo mientras se ejecuta</td></tr>
+<tr><td class="l">Uso típico</td><td>Servidores, varios SO</td><td>Microservicios</td><td>Funciones y eventos</td></tr></table></div></section>
+
+<section class="tab" id="guia"><div id="guia-c"></div></section>
+<section class="tab" id="quiz-s"><span class="num">AUTOEVALUACIÓN</span><h2>Quiz</h2><div id="quiz"></div></section>
+<section class="tab" id="glosario"><span class="num">GLOSARIO</span><h2>Glosario</h2><input id="g-q" placeholder="Buscar término..."><dl id="g-l"></dl></section>
+<section class="tab" id="analisis"><span class="num">07</span><h2>Análisis y conclusiones</h2><div class="grid">
+<div class="card"><h3>Abstracción</h3><p>Cada avance añade una capa que oculta detalles del hardware.</p></div>
+<div class="card"><h3>Equilibrio</h3><p>No hay algoritmo perfecto: FCFS es simple, SJF minimiza espera, RR favorece la interactividad.</p></div>
+<div class="card"><h3>Eficiencia</h3><p>Memoria virtual y contenedores aprovechan mejor los recursos físicos.</p></div>
+<div class="card"><h3>Tendencia</h3><p>El SO se orienta a la nube: aislamiento, orquestación y escalado automático.</p></div></div>
+<div class="note"><b>Limitaciones:</b> los simuladores no consideran costos reales de cambio de contexto, TLB ni prioridades. Óptimo (Belady) es solo una referencia teórica.</div>
+<div class="note"><b>Uso de IA:</b> se usó IA generativa como apoyo en estructura, código y redacción. El equipo debe revisar y adaptar el contenido antes de entregarlo.</div></section>
+
+<section class="tab" id="fuentes"><span class="num">08</span><h2>Fuentes</h2><ul>
+<li><a href="https://www.os-book.com/" target="_blank">Silberschatz, Galvin y Gagne. Operating System Concepts</a></li>
+<li><a href="https://www.kernel.org/doc/html/latest/admin-guide/mm/" target="_blank">Linux Kernel — Memory Management</a></li>
+<li><a href="https://www.linux-kvm.org/" target="_blank">KVM — Kernel-based Virtual Machine</a></li>
+<li><a href="https://docs.docker.com/get-started/docker-overview/" target="_blank">Docker — Overview</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/overview/" target="_blank">Kubernetes — Overview</a></li></ul></section>
+<footer><b style="color:var(--a)">SOLAB</b><br>Sistemas Operativos · Soporte del Sistema Operativo · Grupo 5<br>Integrantes: [escribe aquí los nombres]</footer>
+<script src="libs/three.min.js"></script><script src="js/main.js"></script><script src="js/visuales.js"></script><script src="js/imagenes.js"></script><script src="js/extra.js"></script><script src="js/estudio.js"></script><script src="js/tabs.js"></script></body></html>
